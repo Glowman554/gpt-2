@@ -27,11 +27,13 @@ build_application e621_dataset
 build_application github_dataset
 build_application dataset_summary
 build_application dataset_query
+build_application dataset_join
 
 install_application discord_dataset
 install_application e621_dataset
 install_application github_dataset
 install_application dataset_summary
 install_application dataset_query
+install_application dataset_join
 
 run_cleanup
