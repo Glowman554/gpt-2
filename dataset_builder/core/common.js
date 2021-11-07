@@ -12,7 +12,7 @@ export async function process_files(num_files, path, output_path, file_extension
 		file = file.split("<nl><nl>");
 
 		for (var j = 0; j <  file.length; j++) {
-			if (file[j].length < 1024) {
+			if (file[j].length < 1024 && file[j].trim() != "") {
 				Deno.writeTextFileSync(`${output_path}/${num_files_processed++}.${file_extension}`, file[j]);
 			}
 		}

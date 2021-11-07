@@ -28,7 +28,9 @@ async function main() {
 		var data = Deno.readTextFileSync(input[i]).split("\n");
 		for (let j = 0; j < data.length; j++) {
 			update_console_line(j, data.length, "Reading " + input[i]);
-			dataset.push(data[j]);
+			if (data[j].trim() != "") {
+				dataset.push(data[j]);
+			}
 		}
 	}
 
