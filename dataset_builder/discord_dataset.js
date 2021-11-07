@@ -62,7 +62,7 @@ async function download_messages(count, output_path, token, channel_ids) {
 	debug_log(`Writing messages to ${output_path}`);
 	for (let i = 0; i < messages.length; i++) {
 		update_console_line(i, messages.length, "Saving messages...");
-		await Deno.writeTextFile(output_path + `/${i}.txt`, messages[i]);
+		await Deno.writeTextFile(output_path + `/${i}.txt`, messages[i].replace(/<(.*)>/g, "").trim());
 	}
 
 	debug_log(`Done!`);
