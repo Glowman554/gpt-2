@@ -4,7 +4,7 @@ import regex as re
 from functools import lru_cache
 import argparse
 import numpy as np
-from tqdm import tqdm
+
 from common_args import apply_common_args
 from dataset import load_dataset
 
@@ -40,20 +40,6 @@ def get_pairs(word):
 		pairs.add((prev_char, char))
 		prev_char = char
 	return pairs
-
-def split_in_chunks(text, chunk_size = 1024 * 1000):
-	chunks = []
-	while len(text) > chunk_size:
-		curr_chunk = chunk_size
-		while text[curr_chunk] != '\n':
-			curr_chunk -= 1
-			if curr_chunk == 0:
-				raise Exception("Holy f can't split chunks")
-		chunks.append(text[:curr_chunk])
-		text = text[curr_chunk:]
-
-	chunks.append(text)
-	return chunks
 
 class Encoder:
 	def __init__(self, encoder, bpe_merges, errors='replace'):
@@ -109,18 +95,11 @@ class Encoder:
 		self.cache[token] = word
 		return word
 
-	def encode(self, _text, chunks = False):
+	def encode(self, text):
 		bpe_tokens = []
-		if chunks:
-			for text in tqdm(split_in_chunks(_text)):
-				for token in re.findall(self.pat, text):
-					token = ''.join(self.byte_encoder[b] for b in token.encode('utf-8'))
-					bpe_tokens.extend(self.encoder[bpe_token] for bpe_token in self.bpe(token).split(' '))
-		else:
-			for token in re.findall(self.pat, text):
-				token = ''.join(self.byte_encoder[b] for b in token.encode('utf-8'))
-				bpe_tokens.extend(self.encoder[bpe_token] for bpe_token in self.bpe(token).split(' '))
-
+		for token in re.findall(self.pat, text):
+			token = ''.join(self.byte_encoder[b] for b in token.encode('utf-8'))
+			bpe_tokens.extend(self.encoder[bpe_token] for bpe_token in self.bpe(token).split(' '))
 		return bpe_tokens
 
 	def decode(self, tokens):

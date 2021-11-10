@@ -32,13 +32,13 @@ def load_dataset(enc, path, combine, encoding=None):
 			with open(path, 'r', encoding=encoding) as fp:
 				raw_text += fp.read()
 			if len(raw_text) >= combine:
-				tokens = np.stack(enc.encode(raw_text, chunks=True))
+				tokens = np.stack(enc.encode(raw_text))
 				token_chunks.append(tokens)
 				raw_text = ''
 			else:
 				raw_text += '<|endoftext|>'
 	if raw_text:
-		tokens = np.stack(enc.encode(raw_text, chunks=True))
+		tokens = np.stack(enc.encode(raw_text))
 		token_chunks.append(tokens)
 	return token_chunks
 
