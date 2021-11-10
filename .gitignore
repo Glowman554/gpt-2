@@ -6,3 +6,7 @@ samples
 dist-newstyle
 bin/**
 dataset.npz
+dataset*
+tmp/**
+out/**
+.gm2.log

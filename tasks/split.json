@@ -1,0 +1,10 @@
+{
+	"name": "split",
+	"commands": [
+		"mkdir tmp -p",
+		"split -l 10000 ${prompt} tmp/dataset00"
+	],
+	"dependencies": [],
+	"run_after_task": [],
+	"allow_fail": false
+}

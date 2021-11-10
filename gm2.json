@@ -1,0 +1,9 @@
+{
+	"name": "gpt-2",
+	"description": "Default description lol",
+	"author": "root",
+	"version": "0.0.1",
+	"task_dir": "tasks",
+	"variables": {},
+	"non_silent": false
+}

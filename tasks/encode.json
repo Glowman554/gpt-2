@@ -1,0 +1,14 @@
+{
+	"name": "encode",
+	"commands": [
+		"mkdir ../out -p",
+		"python3 ../model/encoder.py ${file} ../out/${file}.npz --models_dir ../models"
+	],
+	"dependencies": [
+		"split"
+	],
+	"run_after_task": [],
+	"allow_fail": false,
+	"run_for": "*",
+	"run_in": "tmp"
+}
